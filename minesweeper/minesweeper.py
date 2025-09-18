@@ -127,7 +127,7 @@ from string import Template
 
 def generate_html(matrix):
     # read text from html file & store as string
-    html_template = Path('index.html').read_text()
+    html_template = Path('table.html').read_text()
     template = Template(html_template)
     html_table = generate_html_table(matrix)
     return template.substitute(table=html_table)
@@ -135,8 +135,10 @@ def generate_html(matrix):
 def generate_html_table(matrix):
     content = ""
     num_rows = len(matrix)
+    html_row = Path('row.html').read_text()
+    template = Template(html_row)
     for i in range (num_rows):
-        content = content + draw_row(matrix[i])
+        content = content + template.substitute(row=draw_row(matrix[i]))
     return content
 
 def draw_row(row):
@@ -159,3 +161,10 @@ def create_page(html):
 
 # matrix = [[1,2],[3,4]]
 # html = generate_html(matrix)
+
+''' 
+    TO DO:
+    style cells with css based on what is in the cell
+        e.g. 1 - text is green, 2 - text is blue, 3 - text is red
+        mines - mine icon/img, or red background for now
+'''
