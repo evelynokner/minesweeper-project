@@ -9,7 +9,7 @@ def plant_mines(board, num_of_mines):
         # if board[r][c] = -1, do nothing
         # else: board[r][c] = -1, n=n+1
     n = 0
-    while n <= num_of_mines:
+    while n < num_of_mines:
         #run random num generating num_of_mines times
         random_row = random.randrange(0, rows)
         random_col = random.randrange(0, cols)
@@ -152,12 +152,43 @@ def draw_row(row):
 def draw_cell(cell):
    html_cell = Path('cell.html').read_text()
    template = Template(html_cell)
-   return template.substitute(cell_value=cell) # cell_value is the placeholder name in html
+   # change color of cell number based on the number
+   match cell:
+        case -1: # mine unicode or img
+           cell = "&#128163"
+           cell_color = "black"
+        case 0: # blank
+           cell_color = "white"
+        case 1:
+           cell_color = "blue"
+        case 2:
+           cell_color = "green"
+        case 3:
+           cell_color = "red"
+        case 4:
+           cell_color = "mediumpurple"
+        case 5:
+           cell_color = "darkorange"
+        case 6:
+           cell_color = "darkcyan"
+        case 7:
+           cell_color = "lime"
+        case 8:
+           cell_color = "mediumvioletred"
+        case _:
+           cell_color = "black"
+
+   # cell_color and cell_value are placeholder elements in cell.html
+   # replaces html placeholders with new values
+   return template.substitute(cell_color=cell_color, cell_value=cell)
+
 
 # create new html page displaying matrix
-def create_page(html):
+def create_page(matrix):
+    html = generate_html(matrix)
     with open("page.html", "w") as file: # w is for writing in new file
         file.write(html)
+
 
 # matrix = [[1,2],[3,4]]
 # html = generate_html(matrix)
