@@ -10,7 +10,7 @@ def plant_mines(board, num_of_mines):
         # else: board[r][c] = -1, n=n+1
     n = 0
     while n < num_of_mines:
-        #run random num generating num_of_mines times
+        # run random num generating num_of_mines times
         random_row = random.randrange(0, rows)
         random_col = random.randrange(0, cols)
         print(random_row, random_col)
@@ -32,7 +32,7 @@ def count_mines(board):
     return board
 
 def increase_mine_counts(board, x, y):
-    for (x, y) in  neighbors(board, x, y):
+    for (x, y) in neighbors(board, x, y):
         if board[x][y] != -1:
             board[x][y] = board[x][y] + 1
     return board
@@ -118,19 +118,23 @@ def generate_board(rows, cols, num_of_mines):
     return board
 
 # testing 
-board = generate_board(4, 4, 2)
+#board = generate_board(4, 4, 2)
 #print(board)
 
 
 from pathlib import Path
 from string import Template
 
-def generate_html(matrix):
+def generate_html(count_matrix, game_board_matrix): # count_matrix, game_board_matrix
+    joined_matrix = join_matrix(count_matrix, game_board_matrix)
     # read text from html file & store as string
     html_template = Path('table.html').read_text()
     template = Template(html_template)
-    html_table = generate_html_table(matrix)
-    return template.substitute(table=html_table)
+    # make 2 different matrices 
+    html_count_table = generate_html_table(count_matrix)
+    html_joined_table = generate_html_table(joined_matrix)
+    return template.substitute(count_table = html_count_table, 
+                               game_board_table = html_joined_table)
 
 def generate_html_table(matrix):
     content = ""
@@ -141,6 +145,23 @@ def generate_html_table(matrix):
         content = content + template.substitute(row=draw_row(matrix[i]))
     return content
 
+# combine matrices
+def join_matrix(count_matrix, game_board_matrix):
+    # create empty array for the joined matrix
+    joined_table = []
+    num_rows = len(game_board_matrix)
+    num_cols = len(game_board_matrix[0])
+
+    for i in range(num_rows):
+        row = []
+        for j in range(num_cols):
+            if game_board_matrix[i][j] == 1:
+                row.append(count_matrix[i][j])
+            else: 
+                row.append(-2)
+        joined_table.append(row)
+    return joined_table
+
 def draw_row(row):
     content = ""
     #num_cols = len(row)
@@ -150,10 +171,13 @@ def draw_row(row):
     return content
 
 def draw_cell(cell):
-   html_cell = Path('cell.html').read_text()
-   template = Template(html_cell)
-   # change color of cell number based on the number
-   match cell:
+    html_cell = Path('cell.html').read_text()
+    template = Template(html_cell)
+    # change color of cell number based on the number
+    match cell:
+        case -2: # black square unicode
+           cell = "&#x25A0"
+           cell_color = "black"
         case -1: # mine unicode or img
            cell = "&#128163"
            cell_color = "black"
@@ -178,24 +202,43 @@ def draw_cell(cell):
         case _:
            cell_color = "black"
 
-   # cell_color and cell_value are placeholder elements in cell.html
-   # replaces html placeholders with new values
-   return template.substitute(cell_color=cell_color, cell_value=cell)
+    # cell_color and cell_value are placeholder elements in cell.html
+    # replaces html placeholders with new values
+    return template.substitute(cell_color=cell_color, cell_value=cell)
 
 
 # create new html page displaying matrix
-def create_page(matrix):
-    html = generate_html(matrix)
+def create_page(count_matrix, board_matrix):
+    html = generate_html(count_matrix, join_matrix(count_matrix, board_matrix))
     with open("page.html", "w") as file: # w is for writing in new file
         file.write(html)
 
-
-# matrix = [[1,2],[3,4]]
-# html = generate_html(matrix)
-
+# testing
+# numbers representing mines & counts
+count_matrix = [[0,1,1],
+                [1,2,-1],
+                [-1,2,1]] 
+# 0-1 board : 0 - closed ; 1 - open
+game_board_matrix = [[1,1,0],
+                     [1,1,0], 
+                     [0,0,0]]
+create_page(count_matrix, game_board_matrix)
 ''' 
     TO DO:
     style cells with css based on what is in the cell
         e.g. 1 - text is green, 2 - text is blue, 3 - text is red
         mines - mine icon/img, or red background for now
+'''
+
+# drawing game board
+'''
+def draw_row(row):
+    draw_cell(row, col)
+
+def draw_cell(row, col):
+    count = count.matrix[row, col]
+    draw_count_cell(count)
+
+def draw_game_boad(game_board_matrix):
+    # 0 - hidden cell, 1 - open cell
 '''
