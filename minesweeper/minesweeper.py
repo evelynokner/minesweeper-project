@@ -209,11 +209,13 @@ def draw_cell(cell):
 
 # create new html page displaying matrix
 def create_page(count_matrix, board_matrix):
-    html = generate_html(count_matrix, join_matrix(count_matrix, board_matrix))
+    #testing
+    #print(join_matrix(count_matrix, game_board_matrix))
+    html = generate_html(count_matrix, board_matrix)
     with open("page.html", "w") as file: # w is for writing in new file
         file.write(html)
 
-# testing
+# sample boards for testing
 # numbers representing mines & counts
 count_matrix = [[0,1,1],
                 [1,2,-1],
@@ -222,6 +224,8 @@ count_matrix = [[0,1,1],
 game_board_matrix = [[1,1,0],
                      [1,1,0], 
                      [0,0,0]]
+
+# print(join_matrix(count_matrix, game_board_matrix))
 create_page(count_matrix, game_board_matrix)
 ''' 
     TO DO:
