@@ -1,3 +1,10 @@
+# constants for checking if a cell is open or closed
+global openedCell
+openedCell = 1
+global closedCell
+closedCell = 0
+
+
 def plant_mines(board, num_of_mines):
     import random
 
