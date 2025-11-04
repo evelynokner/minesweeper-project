@@ -8,6 +8,7 @@ import minesweeper
 # Modified for minesweeper
 def dfs(gameboard, count_matrix, x, y):
     print(f'dfs with {x} and {y}')
+    
     # openedCell = 1
     openedCell = minesweeper.openedCell
     # closedCell = 0
@@ -23,13 +24,6 @@ def dfs(gameboard, count_matrix, x, y):
     # if cell isn't open, mark as open
     if(gameboard[x][y] == closedCell):
         gameboard[x][y] = openedCell
-    
-    '''
-    for n neighbours(x,y)
-        # check count
-        if count(n) = 0:
-            dfs(gb, counts, nx, ny)
-    '''
 
     neighbours = minesweeper.neighbors(count_matrix, x, y)
     print(f"neighbours: {neighbours}")
@@ -45,18 +39,16 @@ def dfs(gameboard, count_matrix, x, y):
         if count_matrix[nx][ny] == 0:
             dfs(gameboard, count_matrix, nx, ny)
 
+# test method for changing values in an array
+arr1 = [1, 2, 3]
+arr2 = [3, 4, 5]
+def test (arr1, arr2):
+    arr1[0] = 100
+    arr1[1] = 44
+    arr2[2] = 70
+    print(arr1, arr2)
 
-'''def floodFill(matrix, sr, sc, newColor):
-    # If the starting pixel already has the new color
-    if matrix[sr][sc] == newColor:
-        return matrix
-
-    # Call DFS with the starting pixel's original color
-    dfs(matrix, sr, sc, matrix[sr][sc], newColor)
-
-    return matrix
 '''
-
 if __name__ == "__main__":
     # Input initialization
     matrix = [[1, 1, 1, 0],
@@ -76,3 +68,4 @@ if __name__ == "__main__":
     # output grid
     for row in result:
         print(" ".join(map(str, row)))
+'''
