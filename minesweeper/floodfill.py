@@ -1,14 +1,13 @@
-# flood fill sample code
-
-# Example 1
+# flood fill code
 # https://www.geeksforgeeks.org/dsa/flood-fill-algorithm/
 
 import minesweeper
-
+count_matrix = [[0,1,1],[0,1,-1],[0,1,1]]
+gameboard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 # Modified for minesweeper
 def dfs(gameboard, count_matrix, x, y):
     print(f'dfs with {x} and {y}')
-    
+
     # openedCell = 1
     openedCell = minesweeper.openedCell
     # closedCell = 0
@@ -22,21 +21,23 @@ def dfs(gameboard, count_matrix, x, y):
         print("bye")
         return
     # if cell isn't open, mark as open
-    if(gameboard[x][y] == closedCell):
+    #if(gameboard[x][y] == closedCell):
+    else:
+        print("marked as open")
         gameboard[x][y] = openedCell
 
+    # ISSUE : only opening immediate neighbors
     neighbours = minesweeper.neighbors(count_matrix, x, y)
     print(f"neighbours: {neighbours}")
     for (nx, ny) in neighbours:
         # open neighbour cells
-        print(f'opening neighbours: {nx} {ny}')
-        gameboard[nx][ny] == openedCell
-        #n = (x, y)
-        #print(n)
+        print(f'opening cell: {nx} {ny}')
+        gameboard[nx][ny] = openedCell
         # check count
         # if neighbour has no adjacent mines, perform dfs (open cell & adjacent cells)
         # that means that the value at neighbour coordinates is 0 in count_matrix 
         if count_matrix[nx][ny] == 0:
+            print("count is 0")
             dfs(gameboard, count_matrix, nx, ny)
 
 # test method for changing values in an array
