@@ -39,10 +39,11 @@ def dfs(gameboard, count_matrix, x, y):
         # if neighbor is already open, do nothing
         if gameboard[nx][ny] == openedCell:
             continue
-
+        # open adjacent cells to 0
+        else: gameboard[nx][ny] = openedCell
+        # open cells that have count of 0
         if count_matrix[nx][ny] == 0:
             print("count is 0")
-            gameboard[nx][ny] = openedCell
             dfs(gameboard, count_matrix, nx, ny)
 
 # test method for changing values in an array
@@ -57,14 +58,21 @@ def test (arr1, arr2):
 
 if __name__ == "__main__":
     # Input initialization
-    gameboard = [[0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]]
-
-    count_matrix = [[0, 1, -1, 1],
-                    [0, 1, 1, 1],
-                    [0, 0, 0, 0],
-                    [0, 0, 0, 0]]
+    # sample boards for testing
+    # numbers representing mines & counts
+    count_matrix = [[0, 0, 0, 0, 0],
+                    [0, 1, 2, 2, 1],
+                    [0, 1, -1, -1, 2],
+                    [0, 1, 2, 3, -1],
+                    [0, 0, 0, 1, 1]]
+    # 0-1 board : 0 - closed ; 1 - open
+    # todo: automatically create empty starting gameboard of passed dimensions
+    gameboard = [[0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0]]
     # call dfs
-    result = dfs(gameboard, count_matrix, 1, 0)
+    result = dfs(gameboard, count_matrix, 0, 0)
+    print(gameboard)
+    minesweeper.create_page(count_matrix, gameboard)

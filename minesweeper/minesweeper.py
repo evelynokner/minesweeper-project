@@ -4,7 +4,6 @@ openedCell = 1
 global closedCell
 closedCell = 0
 
-
 def plant_mines(board, num_of_mines):
     import random
 
@@ -27,7 +26,7 @@ def plant_mines(board, num_of_mines):
             board[random_row][random_col] = -1
             n = n + 1
     #return (random_row, random_col)
-            
+
 def count_mines(board):
     num_rows = len(board)
     num_cols = len(board[0])
@@ -140,7 +139,7 @@ def generate_html(count_matrix, game_board_matrix): # count_matrix, game_board_m
     # make 2 different matrices 
     html_count_table = generate_html_table(count_matrix)
     html_joined_table = generate_html_table(joined_matrix)
-    return template.substitute(count_table = html_count_table, 
+    return template.substitute(count_table = html_count_table,
                                game_board_table = html_joined_table)
 
 def generate_html_table(matrix):
@@ -182,10 +181,10 @@ def draw_cell(cell):
     template = Template(html_cell)
     # change color of cell number based on the number
     match cell:
-        case -2: # black square unicode
+        case -2: # black square Unicode
            cell = "&#x25A0"
            cell_color = "black"
-        case -1: # mine unicode or img
+        case -1: # mine Unicode or img
            cell = "&#128163"
            cell_color = "black"
         case 0: # blank
@@ -222,34 +221,5 @@ def create_page(count_matrix, board_matrix):
     with open("page.html", "w") as file: # w is for writing in new file
         file.write(html)
 
-# sample boards for testing
-# numbers representing mines & counts
-count_matrix = [[0,1,1],
-                [1,2,-1],
-                [-1,2,1]] 
-# 0-1 board : 0 - closed ; 1 - open
-game_board_matrix = [[1,1,0],
-                     [1,1,0], 
-                     [0,0,0]]
-
 # print(join_matrix(count_matrix, game_board_matrix))
-create_page(count_matrix, game_board_matrix)
-''' 
-    TO DO:
-    style cells with css based on what is in the cell
-        e.g. 1 - text is green, 2 - text is blue, 3 - text is red
-        mines - mine icon/img, or red background for now
-'''
-
-# drawing game board
-'''
-def draw_row(row):
-    draw_cell(row, col)
-
-def draw_cell(row, col):
-    count = count.matrix[row, col]
-    draw_count_cell(count)
-
-def draw_game_boad(game_board_matrix):
-    # 0 - hidden cell, 1 - open cell
-'''
+#create_page(count_matrix, game_board_matrix)
