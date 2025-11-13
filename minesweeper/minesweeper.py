@@ -148,7 +148,7 @@ def generate_html_table(matrix):
     html_row = Path('row.html').read_text()
     template = Template(html_row)
     for i in range (num_rows):
-        content = content + template.substitute(row=draw_row(matrix[i]))
+        content = content + template.substitute(row=draw_row(matrix[i], i))
     return content
 
 # combine matrices
@@ -168,15 +168,15 @@ def join_matrix(count_matrix, game_board_matrix):
         joined_table.append(row)
     return joined_table
 
-def draw_row(row):
+def draw_row(row, row_number):
     content = ""
-    #num_cols = len(row)
-    for cell in row:
-        #cell = row[i]
-        content = content + draw_cell(cell)
+    num_cols = len(row)
+    for col_number in range(num_cols):
+        cell = row[col_number]
+        content = content + draw_cell(cell, row_number, col_number)
     return content
 
-def draw_cell(cell):
+def draw_cell(cell, row, col):
     html_cell = Path('cell.html').read_text()
     template = Template(html_cell)
     # change color of cell number based on the number
@@ -209,8 +209,9 @@ def draw_cell(cell):
            cell_color = "black"
 
     # cell_color and cell_value are placeholder elements in cell.html
+    # row and col indices are used for getting url for move coordinates
     # replaces html placeholders with new values
-    return template.substitute(cell_color=cell_color, cell_value=cell)
+    return template.substitute(cell_color=cell_color, cell_value=cell, row=row, col=col)
 
 
 # create new html page displaying matrix

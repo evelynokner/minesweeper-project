@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 import minesweeper
 import floodfill
 
@@ -46,6 +46,13 @@ def move(row, col):
 
     floodfill.dfs(gameboard, count_matrix, row, col)
     return minesweeper.generate_html(count_matrix, gameboard)
+
+# redirect testing
+# if on page /gameover, redirect to gameboard method's page
+@app.route("/gameover")
+def gameover():
+    # put name of function we want to redirect to in url_for()
+    return redirect(url_for("gameboard"))
 
 if __name__ == "__main__":
     app.run()
