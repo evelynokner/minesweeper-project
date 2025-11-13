@@ -50,9 +50,24 @@ def move(row, col):
 # redirect testing
 # if on page /gameover, redirect to gameboard method's page
 @app.route("/gameover")
-def gameover():
+def redirect_test():
     # put name of function we want to redirect to in url_for()
     return redirect(url_for("gameboard"))
+
+# redirect to different page when game ends
+'''
+Conditions for game over:
+    1) user clicks on a mine (value of -1 on count_matrix)
+    2) every cell on gameboard has been opened (value of 1 on gameboard) EXCEPT mines
+    
+    - create method for page we want to redirect to when gameover = true
+    - set conditions for redirecting to gameover page
+'''
+@app.route("/gameover")
+def gameover():
+    gameover = False
+    return gameover
+    #return redirect(url_for("gameover"))
 
 if __name__ == "__main__":
     app.run()
