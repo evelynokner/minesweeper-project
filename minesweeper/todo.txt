@@ -1,6 +1,6 @@
-- rename modules and organize all methods
+- rename modules and organize all methods and global variables/constants
 MODULES
-    game (currently minesweeper.py)
+    game (currently minesweeper.py & floodfill.py)
         def initialize_board(num_rows, num_cols)
         def move -> call dfs
         check if game is over
