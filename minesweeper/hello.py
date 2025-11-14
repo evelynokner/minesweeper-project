@@ -49,7 +49,7 @@ def move(row, col):
 
 # redirect testing
 # if on page /gameover, redirect to gameboard method's page
-@app.route("/gameover")
+@app.route("/gameovertest")
 def redirect_test():
     # put name of function we want to redirect to in url_for()
     return redirect(url_for("gameboard"))
