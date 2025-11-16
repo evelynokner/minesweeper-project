@@ -1,0 +1,31 @@
+TO DO
+- rename variables such that they are consistent throughout project (count board, game board, x,y/row,col)
+- make spelling of neighbours/neighbors consistent throughout project
+- change order of gameboard & count_matrix being passed in methods so they are consistent
+- rename modules and organize all methods and global variables/constants
+    MODULES
+        game (currently minesweeper.py & floodfill.py)
+            def initialize_board(num_rows, num_cols)
+            def move -> call dfs
+            check if game is over
+                - 3 states of game: continue, won, lost
+                if game over, return indicator of result (win or loss)
+                otherwise, return indicator of "game continues"
+
+        web (currently hello.py)
+            generate_html(gameboard, count_matrix)
+            generate_html_table
+            display_move
+            urls (e.g. /move/row/col)
+                result = move(row, col)
+                    generate_html depending on result
+                    if result = user lost game:
+                        redirect("game lost")
+                    else if result = game_over (user won)
+                        redirect("game over")
+                    else generate_html(gameboard changed by move)
+
+        constants
+            openedCell, closedCell, manually initialized boards for testing
+
+- style board and pages

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+</head>
+<body>
+    <!-- matrix that shows only numbers -->
+    <table><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: green;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">2</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: green;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">2</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#128163</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#128163</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: green;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">2</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: green;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">2</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: red;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">3</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#128163</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td> <!-- row placeholder -->
+</tr></table>
+    <!-- matrix with 0s and 1s representing closed and open cells -->
+    <table><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: green;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">2</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: green;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">2</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#x25A0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#x25A0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#x25A0</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: green;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">2</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: red;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">3</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#x25A0</div></td> <!-- row placeholder -->
+</tr><tr>
+    <td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">0</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: blue;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">1</div></td><td><div class="cell" style="background: white;
+    width: 30px;
+    height: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;">&#x25A0</div></td> <!-- row placeholder -->
+</tr></table>
+</body>
+</html>
