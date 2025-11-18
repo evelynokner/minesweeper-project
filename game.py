@@ -1,4 +1,4 @@
-import const, minesweeper
+import const
 """
 def initialize_board(num_rows, num_cols)
 def move -> call dfs
@@ -32,17 +32,18 @@ count_matrix = [[0, 0, 0, 0, 0],
 # must have access to gameboard & count_matrix
 
 def move(row, col):
-    # check if user hit a mine
-    if(count_matrix[row][col] == -1):
+    # if user clicks a mine, they lose
+    if count_matrix[row][col] == -1:
         return const.LOST
-    # if user did NOT hit mine, call dfs
+    # if user did NOT hit mine, call dfs to check if any neighbouring cells should be opened
     dfs(gameboard, count_matrix, row, col)
     # check if won
     # return result accordingly
     # for row,col
     # if user clicks a cell that is NOT a mine, continue game
-    if count_matrix[row][col] != -1 and gameboard[row][col] == 0:
-        return
+    if count_matrix[row][col] != -1 and gameboard[row][col] == const.OPENED_CELL:
+        pass
+    # if all cells that are NOT a mine are open, the user won
     return const.WON
 
 
@@ -61,7 +62,7 @@ def dfs(gameboard, count_matrix, x, y):
         gameboard[x][y] = opened_cell
 
     # ISSUE : only opening immediate neighbors
-    neighbours = minesweeper.neighbors(count_matrix, x, y)
+    neighbours = neighbors(count_matrix, x, y)
     print(f"neighbours: {neighbours}") #test
     for (nx, ny) in neighbours:
         # if neighbour has no adjacent mines, perform dfs (open cell & adjacent cells)

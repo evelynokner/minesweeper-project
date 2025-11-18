@@ -2,11 +2,9 @@ from flask import Flask, redirect, url_for
 from pathlib import Path
 from string import Template
 # import necessary modules
-import game, const
-import minesweeper
-# import floodfill
+import const, game
 
-# generating html
+# methods for generating html to display board
 def generate_html(count_matrix, game_board_matrix):
     joined_matrix = join_matrix(count_matrix, game_board_matrix)
     # read text from html file & store as string
@@ -102,13 +100,15 @@ def create_page(count_matrix, board_matrix):
     with open("page.html", "w") as file:  # w is for writing in new file
         file.write(html)
 
-
+# Flask methods
 app = Flask(__name__)
+
 
 @app.route("/")
 def home():
     return '<h1>Hello World!</h1> <a href="/gameboard">Gameboard</a>'
 
+# sample
 @app.route("/gameboard")
 def gameboard():
     return "<h2>minesweeper gameboard</h2>"
@@ -143,9 +143,9 @@ def move(row, col):
 
     match result:
         case const.WON:
-            return redirect(url_for("win-page"))
+            return redirect(url_for("won"))
         case const.LOST:
-            return redirect(url_for("lost-page"))
+            return redirect(url_for("lost"))
         case _:
             return generate_html(game.count_matrix, game.gameboard)
 
@@ -159,6 +159,15 @@ def move(row, col):
     #floodfill.dfs(gameboard, count_matrix, row, col)
     # generate html based on result (make methods for win & loss page)
     return generate_html(game.count_matrix, game.gameboard)
+
+
+@app.route("/won-page")
+def won():
+    return '<h1>You won!</h1>'
+
+@app.route("/lost-page")
+def lost():
+    return '<h1>You lost :(</h1>'
 
 # redirect testing
 # if on page /gameover, redirect to gameboard method's page
