@@ -24,14 +24,13 @@ count_matrix = [[0, 0, 0, 0, 0],
                 [0, 0, 0, 1, 1]]
 
 
-# todo: make method to check if game is over
-# 3 states of game: continue, win, loss
-
 # def move(row, col)
 # changes state of gameboard
 # must have access to gameboard & count_matrix
-
+# 3 states of game: continue, win, loss
 def move(row, col):
+    num_rows = len(gameboard)
+    num_cols = len(gameboard[0])
     # if user clicks a mine, they lose
     if count_matrix[row][col] == -1:
         return const.LOST
@@ -41,8 +40,11 @@ def move(row, col):
     # return result accordingly
     # for row,col
     # if user clicks a cell that is NOT a mine, continue game
-    if count_matrix[row][col] != -1 and gameboard[row][col] == const.OPENED_CELL:
-        pass
+    for i in range(num_rows):
+        for j in range(num_cols):
+            # continue game while non-mine cells are closed
+            if count_matrix[i][j] != -1 and gameboard[i][j] == const.CLOSED_CELL:
+                return const.CONTINUE
     # if all cells that are NOT a mine are open, the user won
     return const.WON
 

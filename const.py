@@ -6,7 +6,8 @@ CLOSED_CELL = 0
 #global CLOSED_CELL
 
 WON = 1
-LOST = 0
+LOST = -1
+CONTINUE = 0
 
 # hard-coded boards for testing
 # gameboard starts closed

@@ -28,4 +28,4 @@ TO DO
         constants
             openedCell, closedCell, manually initialized boards for testing
 
-- style board and pages
+- style board and pages, make separate css file
