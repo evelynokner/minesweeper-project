@@ -29,6 +29,7 @@ TO DO
             openedCell, closedCell, manually initialized boards for testing
 
 - style board and pages, make separate css file
+- generate board (don't use hard-coded board)
 - find free deployment
 - websockets javascript
 - ai assistant

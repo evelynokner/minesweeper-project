@@ -16,8 +16,8 @@ gameboard = [[0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0],
              [0, 0, 0, 0, 0]]
 
-#global count_matrix
-count_matrix = [[0, 0, 0, 0, 0],
+#global count_board
+count_board = [[0, 0, 0, 0, 0],
                 [1, 2, 2, 2, 1],
                 [-1, 2, -1, -1, 2],
                 [1, 2, 2, 3, -1],
@@ -26,16 +26,16 @@ count_matrix = [[0, 0, 0, 0, 0],
 
 # def move(row, col)
 # changes state of gameboard
-# must have access to gameboard & count_matrix
+# must have access to gameboard & count_board
 # 3 states of game: continue, win, loss
 def move(row, col):
     num_rows = len(gameboard)
     num_cols = len(gameboard[0])
     # if user clicks a mine, they lose
-    if count_matrix[row][col] == -1:
+    if count_board[row][col] == -1:
         return const.LOST
     # if user did NOT hit mine, call dfs to check if any neighbouring cells should be opened
-    dfs(gameboard, count_matrix, row, col)
+    dfs(gameboard, count_board, row, col)
     # check if won
     # return result accordingly
     # for row,col
@@ -43,14 +43,14 @@ def move(row, col):
     for i in range(num_rows):
         for j in range(num_cols):
             # continue game while non-mine cells are closed
-            if count_matrix[i][j] != -1 and gameboard[i][j] == const.CLOSED_CELL:
+            if count_board[i][j] != -1 and gameboard[i][j] == const.CLOSED_CELL:
                 return const.CONTINUE
     # if all cells that are NOT a mine are open, the user won
     return const.WON
 
 
 # floodfill method with depth first search
-def dfs(gameboard, count_matrix, x, y):
+def dfs(gameboard, count_board, x, y):
     print(f'dfs with {x} and {y}') #test
 
     # open = 1
@@ -63,22 +63,21 @@ def dfs(gameboard, count_matrix, x, y):
         print("marked as open") #test
         gameboard[x][y] = opened_cell
 
-    # ISSUE : only opening immediate neighbors
-    neighbours = neighbors(count_matrix, x, y)
+    neighbours = neighbours(count_board, x, y)
     print(f"neighbours: {neighbours}") #test
     for (nx, ny) in neighbours:
         # if neighbour has no adjacent mines, perform dfs (open cell & adjacent cells)
-        # that means that the value at neighbour coordinates is 0 in count_matrix
-        # if neighbor is already open, do nothing
+        # that means that the value at neighbour coordinates is 0 in count_board
+        # if neighbour is already open, do nothing
         if gameboard[nx][ny] == opened_cell:
             continue
         # open adjacent cells to 0
         else:
             gameboard[nx][ny] = opened_cell
         # open adjacent cells that have count of 0
-        if count_matrix[nx][ny] == 0:
+        if count_board[nx][ny] == 0:
             print("count is 0") #test
-            dfs(gameboard, count_matrix, nx, ny)
+            dfs(gameboard, count_board, nx, ny)
 
 
 
@@ -118,13 +117,13 @@ def count_mines(board):
 
 
 def increase_mine_counts(board, x, y):
-    for (x, y) in neighbors(board, x, y):
+    for (x, y) in neighbours(board, x, y):
         if board[x][y] != -1:
             board[x][y] = board[x][y] + 1
     return board
 
 
-def neighbors(board, x, y):
+def neighbours(board, x, y):
     # dimensions
     num_rows = len(board)
     num_cols = len(board[0])
@@ -169,36 +168,36 @@ def neighbors(board, x, y):
                 (x + 1, y + 1)]
 
 
-def test_neighbors(board):
+def test_neighbours(board):
     # CORNERS
     # top left
     return [
-        sorted(neighbors(board, 0, 0)) == sorted([(0, 1), (1, 0), (1, 1)])
+        sorted(neighbours(board, 0, 0)) == sorted([(0, 1), (1, 0), (1, 1)])
         and
         # top right
-        sorted(neighbors(board, 8, 0)) == sorted([(7, 0), (7, 1), (8, 1)])
+        sorted(neighbours(board, 8, 0)) == sorted([(7, 0), (7, 1), (8, 1)])
         and
         # bottom left
-        sorted(neighbors(board, 0, 8)) == sorted([(0, 7), (1, 7), (1, 8)])
+        sorted(neighbours(board, 0, 8)) == sorted([(0, 7), (1, 7), (1, 8)])
         and
         # bottom right
-        sorted(neighbors(board, 8, 8)) == sorted([(8, 7), (7, 7), (7, 8)])
+        sorted(neighbours(board, 8, 8)) == sorted([(8, 7), (7, 7), (7, 8)])
         and
         # EDGES
         # top
-        sorted(neighbors(board, 4, 0)) == sorted([(3, 0), (3, 1), (4, 1), (5, 1), (5, 0)])
+        sorted(neighbours(board, 4, 0)) == sorted([(3, 0), (3, 1), (4, 1), (5, 1), (5, 0)])
         and
         # bottom
-        sorted(neighbors(board, 4, 8)) == sorted([(3, 8), (3, 7), (4, 7), (5, 7), (5, 8)])
+        sorted(neighbours(board, 4, 8)) == sorted([(3, 8), (3, 7), (4, 7), (5, 7), (5, 8)])
         and
         # left
-        sorted(neighbors(board, 0, 4)) == sorted([(0, 3), (1, 3), (1, 4), (1, 5), (0, 5)])
+        sorted(neighbours(board, 0, 4)) == sorted([(0, 3), (1, 3), (1, 4), (1, 5), (0, 5)])
         and
         # right
-        sorted(neighbors(board, 8, 4)) == sorted([(8, 3), (7, 3), (7, 4), (7, 5), (8, 5)])
+        sorted(neighbours(board, 8, 4)) == sorted([(8, 3), (7, 3), (7, 4), (7, 5), (8, 5)])
         and
         # MIDDLE
-        sorted(neighbors(board, 5, 5)) == sorted([(4, 4), (4, 5), (4, 6), (5, 4), (5, 6), (6, 4), (6, 5), (6, 6)])
+        sorted(neighbours(board, 5, 5)) == sorted([(4, 4), (4, 5), (4, 6), (5, 4), (5, 6), (6, 4), (6, 5), (6, 6)])
     ]
 
 
