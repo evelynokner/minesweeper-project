@@ -1,5 +1,2 @@
-// js file for clicking on board
-
-const cell = document.querySelector('.cell');
-
-cell.onclick = move()
+// add js later
+// mark cells as mines with a flag

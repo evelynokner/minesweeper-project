@@ -1,10 +1,11 @@
-# consts representing if a cell is opened or closed in gameboard matrix
 # uppercase for constants
+# consts representing if a cell is opened or closed in gameboard matrix
 OPENED_CELL = 1
 #global OPENED_CELL
 CLOSED_CELL = 0
 #global CLOSED_CELL
 
+# game state consts
 WON = 1
 LOST = -1
 CONTINUE = 0

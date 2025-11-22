@@ -1,0 +1,11 @@
+.cell a{
+    /* remove underline on links */
+    text-decoration: none;
+    color: #222222;
+}
+
+.table{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}

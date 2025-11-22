@@ -104,7 +104,6 @@ def plant_mines(board, num_of_mines):
         else:
             board[random_row][random_col] = -1
             n = n + 1
-    # return (random_row, random_col)
 
 
 def count_mines(board):

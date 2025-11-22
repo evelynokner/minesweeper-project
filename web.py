@@ -1,8 +1,10 @@
+# this is the module that we run to start the application
 from flask import Flask, redirect, url_for
 from pathlib import Path
 from string import Template
 # import necessary modules
 import const, game
+
 
 # methods for generating html to display board
 def generate_html(count_matrix, game_board_matrix):
