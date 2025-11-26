@@ -1,5 +1,5 @@
 # this is the module that we run to start the application
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, request
 from pathlib import Path
 from string import Template
 # import necessary modules
@@ -110,14 +110,23 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     # change to POST method later to pass user-submitted values
-    return ("<form action='/minesweeper' method='GET'>"
+    return ("<form action='/new-game' method='GET'>"
             "<label for='rows'>Rows: </label>"
                 "<input type='number' id='rows' name='rows'>"
             "<label for='cols'>Columns: </label>"
-                "<input type='number' id='cols' name='columns'>"
+                "<input type='number' id='cols' name='cols'>"
             "<label for='num-mines'>Number of Mines: </label>"
-                "<input type='number' id='num-mines' name='number of mines'>"
+                "<input type='number' id='num-mines' name='num-mines'>"
             "<input type='submit' value='Submit'></form>")
+
+@app.route("/new-game")
+def new_game():
+    rows = int(request.args.get('rows'))
+    cols = int(request.args.get('cols'))
+    num_mines = int(request.args.get('num-mines'))
+    game.count_board = game.generate_board(rows, cols, num_mines)
+    game.gameboard = [[0 for i in range(cols)] for j in range(rows)]
+    return generate_html(game.count_board, game.gameboard)
 
 
 # sample
@@ -140,7 +149,7 @@ def display_board():
                  [0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0]]
 
-    return generate_html(count_board, gameboard)
+    return generate_html(game.count_board, game.gameboard)
 
 
 # result of each move is either won, lost or continue
