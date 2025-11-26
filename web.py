@@ -109,7 +109,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return '<h1>Hello World!</h1> <a href="/gameboard">Gameboard</a>'
+    # change to POST method later to pass user-submitted values
+    return ("<form action='/minesweeper' method='GET'>"
+            "<label for='rows'>Rows: </label>"
+                "<input type='number' id='rows' name='rows'>"
+            "<label for='cols'>Columns: </label>"
+                "<input type='number' id='cols' name='columns'>"
+            "<label for='num-mines'>Number of Mines: </label>"
+                "<input type='number' id='num-mines' name='number of mines'>"
+            "<input type='submit' value='Submit'></form>")
 
 
 # sample

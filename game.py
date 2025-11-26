@@ -63,7 +63,7 @@ def dfs(gameboard, count_board, x, y):
         print("marked as open") #test
         gameboard[x][y] = opened_cell
 
-    neighbours = neighbours(count_board, x, y)
+    neighbours = neighbors(count_board, x, y)
     print(f"neighbours: {neighbours}") #test
     for (nx, ny) in neighbours:
         # if neighbour has no adjacent mines, perform dfs (open cell & adjacent cells)
@@ -78,7 +78,6 @@ def dfs(gameboard, count_board, x, y):
         if count_board[nx][ny] == 0:
             print("count is 0") #test
             dfs(gameboard, count_board, nx, ny)
-
 
 
 # methods for generating a board
@@ -117,17 +116,16 @@ def count_mines(board):
 
 
 def increase_mine_counts(board, x, y):
-    for (x, y) in neighbours(board, x, y):
+    for (x, y) in neighbors(board, x, y):
         if board[x][y] != -1:
             board[x][y] = board[x][y] + 1
     return board
 
 
-def neighbours(board, x, y):
+def neighbors(board, x, y):
     # dimensions
     num_rows = len(board)
     num_cols = len(board[0])
-    point = (x, y)
 
     # CORNERS
     if x > num_rows - 1 or x < 0 or y > num_cols - 1 or y < 0:
@@ -168,36 +166,36 @@ def neighbours(board, x, y):
                 (x + 1, y + 1)]
 
 
-def test_neighbours(board):
+def test_neighbors(board):
     # CORNERS
     # top left
     return [
-        sorted(neighbours(board, 0, 0)) == sorted([(0, 1), (1, 0), (1, 1)])
+        sorted(neighbors(board, 0, 0)) == sorted([(0, 1), (1, 0), (1, 1)])
         and
         # top right
-        sorted(neighbours(board, 8, 0)) == sorted([(7, 0), (7, 1), (8, 1)])
+        sorted(neighbors(board, 8, 0)) == sorted([(7, 0), (7, 1), (8, 1)])
         and
         # bottom left
-        sorted(neighbours(board, 0, 8)) == sorted([(0, 7), (1, 7), (1, 8)])
+        sorted(neighbors(board, 0, 8)) == sorted([(0, 7), (1, 7), (1, 8)])
         and
         # bottom right
-        sorted(neighbours(board, 8, 8)) == sorted([(8, 7), (7, 7), (7, 8)])
+        sorted(neighbors(board, 8, 8)) == sorted([(8, 7), (7, 7), (7, 8)])
         and
         # EDGES
         # top
-        sorted(neighbours(board, 4, 0)) == sorted([(3, 0), (3, 1), (4, 1), (5, 1), (5, 0)])
+        sorted(neighbors(board, 4, 0)) == sorted([(3, 0), (3, 1), (4, 1), (5, 1), (5, 0)])
         and
         # bottom
-        sorted(neighbours(board, 4, 8)) == sorted([(3, 8), (3, 7), (4, 7), (5, 7), (5, 8)])
+        sorted(neighbors(board, 4, 8)) == sorted([(3, 8), (3, 7), (4, 7), (5, 7), (5, 8)])
         and
         # left
-        sorted(neighbours(board, 0, 4)) == sorted([(0, 3), (1, 3), (1, 4), (1, 5), (0, 5)])
+        sorted(neighbors(board, 0, 4)) == sorted([(0, 3), (1, 3), (1, 4), (1, 5), (0, 5)])
         and
         # right
-        sorted(neighbours(board, 8, 4)) == sorted([(8, 3), (7, 3), (7, 4), (7, 5), (8, 5)])
+        sorted(neighbors(board, 8, 4)) == sorted([(8, 3), (7, 3), (7, 4), (7, 5), (8, 5)])
         and
         # MIDDLE
-        sorted(neighbours(board, 5, 5)) == sorted([(4, 4), (4, 5), (4, 6), (5, 4), (5, 6), (6, 4), (6, 5), (6, 6)])
+        sorted(neighbors(board, 5, 5)) == sorted([(4, 4), (4, 5), (4, 6), (5, 4), (5, 6), (6, 4), (6, 5), (6, 6)])
     ]
 
 
