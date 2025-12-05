@@ -1,3 +1,5 @@
+/* not working with html files, will do inline css for now */
+
 .cell a{
     /* remove underline on links */
     text-decoration: none;

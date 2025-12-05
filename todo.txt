@@ -31,5 +31,6 @@ TO DO
 - style board and pages, make separate css file
 - generate board (don't use hard-coded board)
 - find free deployment
+- change empty cell to greyed background instead of black square icon
 - websockets javascript
 - ai assistant
