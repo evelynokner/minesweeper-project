@@ -59,13 +59,16 @@ def draw_row(row, row_number):
 def draw_cell(cell, row, col):
     html_cell = Path('cell.html').read_text()
     template = Template(html_cell)
+    # default values for cell appearance
+    bg_color = "white"
+    cell_color = "black" # color of numbers
     # change color of cell number based on the number
     match cell:
-        case -2:  # black square Unicode
-            cell = "&#x25A0"
-            cell_color = "black"
-        case -1:  # mine Unicode
-            cell = "&#128163"
+        case -2:
+            # change to tile image
+            bg_color = "black"
+        case -1:
+            cell = "&#128163" # mine unicode
             cell_color = "black"
         case 0:  # blank
             cell_color = "white"
@@ -91,7 +94,7 @@ def draw_cell(cell, row, col):
     # cell_color and cell_value are placeholder elements in cell.html
     # row and col indices are used for getting url for move coordinates
     # replaces html placeholders with new values
-    return template.substitute(cell_color=cell_color, cell_value=cell, row=row, col=col)
+    return template.substitute(bg_color=bg_color, cell_color=cell_color, cell_value=cell, row=row, col=col)
 
 
 # create new html page displaying matrix
